@@ -75,8 +75,8 @@
                 
                 <p class="texto"><?= $mensaje->getTexto()?></p>     <!--peco y pulsar intro se pone así en vez de con echo -->
             </div>
-        
         <?php  endforeach; ?>
+        
         <a href="insertar_mensaje.php">Nuevo mensaje</a>
     </main>
 </body>
