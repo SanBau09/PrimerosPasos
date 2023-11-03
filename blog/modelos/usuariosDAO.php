@@ -32,6 +32,32 @@
             return $array_usuarios;
         }
 
+        /**
+         * Obtiene un usuario de la BD en función del id
+         * @return Usuario Devuelve un Objeto de la clase Usuario o null si no existe
+         */
+        public function getByEmail($email):Usuario|null {
+            if(!$stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE email = ?"))
+            {
+                echo "Error en la SQL: " . $this->conn->error;
+            }
+            //Asociar las variables a las interrogaciones(parámetros)
+            $stmt->bind_param('s',$email);
+            //Ejecutamos la SQL
+            $stmt->execute();
+            //Obtener el objeto mysql_result
+            $result = $stmt->get_result();
+
+            //Si ha encontrado algún resultado devolvemos un objeto de la clase Usuario, sino null
+            if($result->num_rows >= 1){
+                $usuario = $result->fetch_object(Usuario::class);
+                return $usuario;
+            }
+            else{
+                return null;
+            }
+        } 
+
 
         /**
          * BORRA EL USUARIO de la tabla usuarios del id pasado por parámetro
@@ -65,7 +91,7 @@
             $email = $usuario->getEmail();
             $password = $usuario->getPassword();
             $foto = $usuario->getFoto();
-            $stmt->bind_param('ssi',$email, $password, $foto);
+            $stmt->bind_param('sss',$email, $password, $foto);
             if($stmt->execute()){
                 return $stmt->insert_id;
             }

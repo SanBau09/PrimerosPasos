@@ -61,6 +61,15 @@
 <body>
     <header>
         <h1>Todos los mensajes</h1> 
+        <form action="login.php" method="post">
+            <input type="email" name="email" placeholder="email">
+            <input type="password" name="password" placeholder="password">
+            <input type="submit" value="login">
+
+            <a href="registrar_usuarios.php">Registrar Usuario</a>
+        </form>
+        
+
     </header>
 
     <main>
@@ -76,7 +85,7 @@
                 <p class="texto"><?= $mensaje->getTexto()?></p>     <!--peco y pulsar intro se pone así en vez de con echo -->
             </div>
         <?php  endforeach; ?>
-        
+
         <a href="insertar_mensaje.php">Nuevo mensaje</a>
     </main>
 </body>
