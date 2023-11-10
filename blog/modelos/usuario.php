@@ -5,6 +5,7 @@
         private $email;
         private $password;
         private $foto;
+        private $sid;
 
     // Métodos para acceder a los atributos
         public function getId()
@@ -54,6 +55,18 @@
         public function setFoto($foto): self
         {
             $this->foto = $foto;
+
+            return $this;
+        }
+
+        public function getSid()
+        {
+            return $this->sid;
+        }
+
+        public function setSid($sid): self
+        {
+            $this->sid = $sid;
 
             return $this;
         }

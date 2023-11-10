@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
     require_once 'modelos/connexionDB.php';
     require_once 'modelos/mensaje.php';
