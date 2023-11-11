@@ -33,7 +33,7 @@
         }
 
         /**
-         * Obtiene un usuario de la BD en función del id
+         * Obtiene un usuario de la BD en función del email
          * @return Usuario Devuelve un Objeto de la clase Usuario o null si no existe
          */
         public function getByEmail($email):Usuario|null {
