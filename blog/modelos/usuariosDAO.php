@@ -63,7 +63,7 @@
          * @return Usuario Devuelve un Objeto de la clase Usuario o null si no existe
          */
         public function getBySid($sdi):Usuario|null {
-            if(!$stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE email = ?"))
+            if(!$stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE sid = ?"))
             {
                 echo "Error en la SQL: " . $this->conn->error;
             }
