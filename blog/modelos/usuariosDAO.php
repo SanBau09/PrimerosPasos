@@ -68,7 +68,7 @@
                 echo "Error en la SQL: " . $this->conn->error;
             }
             //Asociar las variables a las interrogaciones(parámetros)
-            $stmt->bind_param('s',$email);
+            $stmt->bind_param('s',$sid);
             //Ejecutamos la SQL
             $stmt->execute();
             //Obtener el objeto mysql_result
