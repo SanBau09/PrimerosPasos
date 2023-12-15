@@ -1,0 +1,78 @@
+.mensaje{
+    margin: 30px auto;
+    padding: 5px;
+    border: 1px solid black;
+    width: 80%;
+    position: relative;
+}
+
+.nuevoMensaje{
+    margin: 30px auto;
+    padding: 5px;
+    border: 1px solid black;
+    width: 80%;
+    background-color: #00f;
+    color: white;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+header{
+    margin: 30px auto;
+    padding: 5px;
+    border: 1px solid black;
+    width: 80%;
+    display: block;
+    text-align: center;
+
+}
+
+.titulo{
+    font-size: 2em;
+}
+
+.texto{
+    font-size: 1.5em;
+}
+
+.icono_borrar{
+    top: 5px;
+    right: 5px;
+    position: absolute;
+}
+
+.icono_editar{
+    top: 5px;
+    right: 25px;
+    position: absolute;
+}
+
+.color_gris:hover{
+    color: black;
+}
+.color_gris{
+    color: #aaa;
+}
+.error{
+    color: red;
+    display: block;
+    padding: 10px;
+    margin: auto 50px;
+    border: 1px solid red;
+    text-align: center;
+}
+.fotoUsuario{
+    height: 50px;
+}
+
+.ver_mensaje{
+    margin: 10px auto ;
+    padding: 5px;
+    border: 1px solid black;
+    width: 80%;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    min-height: 400px;
+}
+
