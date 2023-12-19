@@ -2,6 +2,8 @@
 class ControladorUsuarios{
 
     public function registrar(){
+        $error='';
+
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             //limpiamos los datos 
@@ -24,7 +26,8 @@ class ControladorUsuarios{
                 //Copiamos la foto al disco
     
                 if($_FILES['foto']['type'] != 'image/jpeg' &&
-                 $_FILES['foto']['type'] != 'image/png'){
+                 $_FILES['foto']['type'] != 'image/png' &&
+                 $_FILES['foto']['type'] != 'image/webp'){
                     $error= "la foto no tiene el formato admitido";
                 }else{
                     //Calculamos el hash para el nombre de archivo
@@ -41,22 +44,26 @@ class ControladorUsuarios{
     
                     move_uploaded_file(($_FILES)['foto']['tmp_name'], "web/fotosUsuarios/$foto");
                 }
-    
-                //Insertamos en la BD
-                $usuariosDAO = new usuariosDAO($conn);
-                $usuario = new usuario();
-                $usuario->setEmail($email);
-    
-                //encriptamos el password
-                $passwordCifrado = password_hash($password, PASSWORD_DEFAULT);
-                $usuario->setPassword($passwordCifrado);
-                $usuario->setFoto($foto);
-                $usuario->setSid(sha1(rand()+time()), true);
-    
-                if($usuariosDAO->insert($usuario)){
-                    header("location: index.php");
-                }else{
-                    $error = "No se ha podido insertar el usuario";
+
+                if($error == ''){    //Si no hay error
+
+                    //Insertamos en la BD
+                    $usuariosDAO = new usuariosDAO($conn);
+                    $usuario = new usuario();
+                    $usuario->setEmail($email);
+        
+                    //encriptamos el password
+                    $passwordCifrado = password_hash($password, PASSWORD_DEFAULT);
+                    $usuario->setPassword($passwordCifrado);
+                    $usuario->setFoto($foto);
+                    $usuario->setSid(sha1(rand()+time()), true);
+        
+                    if($usuariosDAO->insert($usuario)){
+                        header("location: index.php");
+                        die();
+                    }else{
+                        $error = "No se ha podido insertar el usuario";
+                    }
                 }
             }
         }
@@ -82,6 +89,9 @@ class ControladorUsuarios{
             $_SESSION['email'] = $usuario->getEmail();
             $_SESSION['foto'] = $usuario->getFoto();
             $_SESSION['id'] = $usuario->getId();
+
+            //Creamos la cookie
+            setcookie('email', $usuario->getSid(),time()+24*60*60,'/');
             
             //Redirigimos a index.php
             header('location: index.php');
@@ -96,6 +106,8 @@ class ControladorUsuarios{
     public function logout(){
         session_start();
         session_unset(); //Borra todas las variables de sesión
+        
+        setcookie('email','',0,'/');
         
         header('location: index.php');
     }

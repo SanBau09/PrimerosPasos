@@ -12,12 +12,12 @@
 
 <body>
     <header>
-        <h1>Todos los mensajes</h1> 
+        <h1 class="tituloPagina">Todos los mensajes</h1> 
 
         <?php if(isset($_SESSION['email'])): ?>
-            <img src="fotosUsuarios/<?= $_SESSION['foto']?>" class="fotoUsuario" alt="">
+            <img src="web/fotosUsuarios/<?= $_SESSION['foto']?>" class="fotoUsuario" alt="">
             <span class="emailUsuario"><?= $_SESSION['email'] ?></span>
-            <a href="logout.php">cerrar sesión</a>
+            <a href="index.php?accion=logout.php">cerrar sesión</a>
 
         <?php else: ?>
             <form action="index.php?accion=login" method="post">
@@ -43,11 +43,13 @@
 
                 <?php if(isset($_SESSION['email']) && $_SESSION['id']== $mensaje->getIdUsuario()): ?>
 
-                    <span class="icono_borrar"><a href="borrar_mensaje.php?id=<?=$mensaje->getId()?>"><i class="fa-solid fa-trash color_gris"></i></a></span>
-                    <span class="icono_editar"><a href="editar_mensaje.php?id=<?=$mensaje->getId()?>"><i class="fa-solid fa-pen-to-square color_gris" "></i></a></span>
+                    <span class="icono_borrar"><a href="index.php?accion=borrar_mensaje&id=<?=$mensaje->getId()?>"><i class="fa-solid fa-trash color_gris"></i></a></span>
+                    <span class="icono_editar"><a href="index.php?accion=editar_mensaje&id=<?=$mensaje->getId()?>"><i class="fa-solid fa-pen-to-square color_gris" "></i></a></span>
                 <?php endif; ?>
 
                 <p class="texto"><?= $mensaje->getTexto()?></p>     <!--peco y pulsar intro se pone así en vez de con echo -->
+                <img src="fotosUsuarios/<?= $mensaje->getUsuario()->getFoto() ?>" height="100px">
+                <span><?= $mensaje->getUsuario()->getEmail() ?></span>
             </div>
         <?php  endforeach; ?>
 
@@ -58,7 +60,7 @@
     </main>
 
     <script>
-
+        setTimeout(function(){document.getElementById('mensajeError').style.display='none'},5000);
     </script>
 </body>
 </html>
