@@ -27,7 +27,9 @@ botonInsertar.addEventListener('click',function (){
         capaTexto.innerHTML= tarea.texto;
 
         let papelera = document.createElement('i');
-        papelera.classList.add('fa-solid fa-trash papelera');
+        papelera.classList.add('fa-solid');
+        papelera.classList.add('fa-trash');
+        papelera.classList.add('papelera');
 
         capaTarea.appendChild(capaTexto);
         capaTarea.appendChild(papelera);
