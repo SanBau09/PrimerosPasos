@@ -8,3 +8,6 @@ $tareasDAO = new TareasDAO();
 $tarea = $tareasDAO->insertarTarea($texto);
 
 print $tarea->toJSON();
+
+//Simulamos que el servidor tarda 1sg para probar el preloader
+sleep(1);

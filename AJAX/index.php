@@ -21,14 +21,15 @@ $tareas = $tareasDAO->obtenerTodasLasTareas();
         <?php foreach ($tareas as $tarea): ?>
             <div class="tarea">
                 <div class="texto"><?= $tarea->getTexto() ?></div>
-                <i class="fa-solid fa-trash papelera"></i>
+                <i class="fa-solid fa-trash papelera" data-idTarea="<?=$tarea->getId()?>"></i>
+                <img src="preload.gif" class="preloaderBorrar">
             </div>
 
         <?php endforeach; ?>
     </div>
 
     <input type="text" id="nuevaTarea">
-    <button id="botonNuevaTarea">Enviar</button>
+    <button id="botonNuevaTarea">Enviar</button><img src="preload.gif" id="preloaderInsertar">
 
     <script src="js.js" type="text/javascript"></script>
 </body>
