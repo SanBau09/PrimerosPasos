@@ -7,8 +7,11 @@ require_once 'app/modelos/mensaje.php';
 require_once 'app/modelos/mensajesDAO.php';
 require_once 'app/modelos/usuario.php';
 require_once 'app/modelos/usuariosDAO.php';
+require_once 'app/modelos/Favorito.php';
+require_once 'app/modelos/FavoritosDAO.php';
 require_once 'app/controladores/ControladorMensajes.php';
 require_once 'app/controladores/ControladorUsuarios.php';
+require_once 'app/controladores/ControladorFavoritos.php';
 require_once 'app/utils/funciones.php';
 
  //Mapa de enrutamiento
@@ -37,6 +40,12 @@ require_once 'app/utils/funciones.php';
                       'privada'=>true),
     'registrar' => array('controlador' =>'ControladorUsuarios',
                          'metodo' =>'registrar',
+                         'privada'=>false),
+    'insertar_favorito'=>array('controlador'=>'ControladorFavoritos', 
+                         'metodo'=>'insertar', 
+                         'privada'=>false),
+    'borrar_favorito'=>array('controlador'=>'ControladorFavoritos', 
+                         'metodo'=>'borrar', 
                          'privada'=>false)
 );
 
