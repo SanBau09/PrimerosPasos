@@ -25,15 +25,24 @@ class TareasDAO {
         return $tareas;
     }
 
-    public function insertarTarea($texto) {
-        $texto = $this->conexion->real_escape_string($texto);
-        $query = "INSERT INTO tareas (texto) VALUES ('$texto')";
-        
-        if ($this->conexion->query($query) === TRUE) {
-            $idInsertado = $this->conexion->insert_id;
-            $nuevaTarea = $this->obtenerTareaPorID($idInsertado);
+    public function insertarTarea($texto, $fecha, $foto, $realizada) {
+        // Preparar la consulta SQL con marcadores de posición (?)
+        $query = "INSERT INTO tareas (texto, fecha, foto, realizada) VALUES (?, ?, ?, 0)";
+        $stmt = $this->conexion->prepare($query);   // Preparar la sentencia
+    
+        // Vincular los parámetros
+        $stmt->bind_param("sssi", $texto, $fecha, $foto, $realizada);
+    
+        // Ejecutar la sentencia
+        if ($stmt->execute()) {
+            // Obtener el ID insertado
+            $idInsertado = $stmt->insert_id;
+            $nuevaTarea = $this->obtenerTareaPorID($idInsertado); // Obtener la tarea recién insertada
+    
+            $stmt->close(); // Cerrar la sentencia
             return $nuevaTarea;
-        } else {
+        } else {  // Manejar errores o devolver null
+            $stmt->close();
             return null;
         }
     }
