@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 02-02-2024 a las 19:11:26
+-- Tiempo de generación: 06-02-2024 a las 14:14:25
 -- Versión del servidor: 8.0.34-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.14
 
@@ -31,19 +31,10 @@ CREATE TABLE `tareas` (
   `id` int NOT NULL,
   `texto` varchar(4000) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `foto` varchar(200) COLLATE utf8mb3_spanish_ci NOT NULL,
-  `realizada` tinyint(1) NOT NULL
+  `foto` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `realizada` tinyint(1) NOT NULL,
+  `idUsuario` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `tareas`
---
-
-INSERT INTO `tareas` (`id`, `texto`, `fecha`, `foto`, `realizada`) VALUES
-(1, 'Estudiar DWES', '2024-01-09 17:06:23', '', 0),
-(2, 'Estudiar JS', '2024-01-09 17:06:23', '', 0),
-(32, 'final', '2024-01-19 18:33:30', '', 0),
-(33, 'esta es una nueva tarea', '2024-01-23 16:26:23', '', 0);
 
 -- --------------------------------------------------------
 
@@ -74,7 +65,8 @@ INSERT INTO `usuarios` (`id`, `email`, `password`, `sid`, `nombre`) VALUES
 -- Indices de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Usuarios` (`idUsuario`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -97,6 +89,16 @@ ALTER TABLE `tareas`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  ADD CONSTRAINT `FK_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
