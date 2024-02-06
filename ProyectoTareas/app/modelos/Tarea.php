@@ -90,14 +90,14 @@ class Tarea {
     }
 
     /**
-     * Get the value of realizada
+     * Get the value of idUsuario
      */
     public function getIdUsuario(){
         return $this->idUsuario;
     }
 
     /**
-     * Set the value of realizada
+     * Set the value of idUsuario
      */
     public function setIdUsuario($idUsuario): self{
         $this->idUsuario = $idUsuario;

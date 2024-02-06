@@ -27,14 +27,14 @@
                 <?php if(Sesion::getUsuario() && Sesion::getUsuario()->getId()==$tarea->getIdUsuario()): ?>
                     <div class="texto"><?= $tarea->getTexto() ?></div>
                     <i class="fa-solid fa-trash papelera" data-idTarea="<?= $idTarea?>"></i>
-                    <img src="preloader.gif" class="preloaderBorrar">
+                    <img src="web/images/preloader.gif" class="preloaderBorrar">
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </div>
 
     <input type="text" id="nuevaTarea">
-    <button id="botonNuevaTarea">Enviar</button><img src="preloader.gif" id="preloaderInsertar">
+    <button id="botonNuevaTarea">Enviar</button><img src="web/images/preloader.gif" id="preloaderInsertar">
 
     <script src="web/js/js.js" type="text/javascript"></script>
 </body>

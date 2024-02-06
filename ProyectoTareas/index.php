@@ -35,7 +35,13 @@ $mapa = array(
                        'privada'=>false),
     'tareas'=>array('controlador'=>'ControladorTareas', 
                        'metodo'=>'verTareas', 
-                       'privada'=>false),               
+                       'privada'=>false),
+    'insertar_tarea' => array('controlador' =>'ControladorTareas', 
+                       'metodo' =>'insertar',
+                       'privada'=>true),
+    'borrar_tarea'=>array('controlador'=>'ControladorTareas',
+                       'metodo'=>'borrar', 
+                       'privada'=>true),          
 );
 
 //Parseo de la ruta
@@ -86,6 +92,13 @@ $metodo = $mapa[$accion]['metodo'];
 
 //Ejecutamos el método de la clase controlador
 $objeto = new $controlador();
-$objeto->$metodo();
+
+//Como hay métodos que requieren del idTarea para ejecutarse, hay que recoger el idTarea de los parámetros de la URL
+if(isset($_GET['idTarea'])){
+    $objeto->$metodo($_GET['idTarea']);
+}else{
+    $objeto->$metodo();
+}
+
 
 ?>

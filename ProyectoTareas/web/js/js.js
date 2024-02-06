@@ -16,12 +16,11 @@ botonInsertar.addEventListener('click',function (){
         body: datos
       };
     
-    fetch('insertar.php', options)
+    fetch('index.php?accion=insertar_tarea', options)
     .then( respuesta => {
         return respuesta.json();
     })
     .then(tarea => {
-        //console.log(tarea);
         //Añado la la tarea al div "tareas" modificando el DOM
         var capaTarea = document.createElement('div');
         var capaTexto = document.createElement('div');
@@ -35,7 +34,7 @@ botonInsertar.addEventListener('click',function (){
         papelera.classList.add('fa-solid', 'fa-trash', 'papelera');
         papelera.setAttribute("data-idTarea",tarea.id);
 
-        preloader.setAttribute('src','preloader.gif');
+        preloader.setAttribute('src','web/images/preloader.gif');
         preloader.classList.add('preloaderBorrar');
         
         capaTarea.appendChild(capaTexto);
@@ -70,15 +69,15 @@ function manejadorBorrar(){
     let preloader = this.parentElement.querySelector('img');
     preloader.style.visibility="visible";
     this.style.visibility='hidden';
-    //Llamamos al script del servidor que borra la tarea pasándole el idTarea como parámetro
-    fetch('borrar.php?id='+idTarea)
+    //Llamamos al script del servidor que borra la tarea, pasándole la accion borrar_tarea del index y el idTarea como parámetro con &
+    fetch('index.php?accion=borrar_tarea&idTarea='+idTarea)
     .then(datos => datos.json())
     .then(respuesta =>{
         if(respuesta.respuesta=='ok'){
             this.parentElement.remove();
         }
         else{
-            alert("No se ha encontrado la tarea en el servidor");
+            alert(respuesta.mensaje);
             this.style.visibility='visible';
         }
     })
