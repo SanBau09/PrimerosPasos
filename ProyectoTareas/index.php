@@ -34,7 +34,7 @@ $mapa = array(
                        'metodo'=>'registrar', 
                        'privada'=>false),
     'tareas'=>array('controlador'=>'ControladorTareas', 
-                       'metodo'=>'tareas', 
+                       'metodo'=>'verTareas', 
                        'privada'=>false),               
 );
 

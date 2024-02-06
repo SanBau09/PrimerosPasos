@@ -6,6 +6,7 @@ class Tarea {
     private $fecha;
     private $foto;
     private $realizada;
+    private $idUsuario;
 
 
     /**
@@ -88,13 +89,30 @@ class Tarea {
         return $this;
     }
 
+    /**
+     * Get the value of realizada
+     */
+    public function getIdUsuario(){
+        return $this->idUsuario;
+    }
+
+    /**
+     * Set the value of realizada
+     */
+    public function setIdUsuario($idUsuario): self{
+        $this->idUsuario = $idUsuario;
+
+        return $this;
+    }
+
     public function toJSON(){
         return json_encode(
                 ['id'=>$this->getId(),
                 'texto' => $this->getTexto(),
                 'fecha' => $this->getFecha(),
                 'foto' => $this->getFoto(),
-                'realizada' => $this->getRealizada()]
+                'realizada' => $this->getRealizada(),
+                'idUsuario' => $this->getIdUsuario()]
         );
     }
 }

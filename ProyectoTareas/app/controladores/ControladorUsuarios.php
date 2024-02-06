@@ -26,14 +26,17 @@ Class ControladorUsuarios{
                 //Creamos la cookie para que nos recuerde 1 semana
                 setcookie('sid',$usuario->getSid(),time()+24*60*60,'/');
                 
-                //Redirigimos a index.php
-                header('location: index.php');
+                //Redirigimos a tareas.php                
+                header('location: index.php?accion=tareas');
                 die();
             }
         }
-        //email o password incorrectos, redirigir a index.php
-        guardarMensaje("Email o password incorrectos");
-        header('location: index.php');
+        else{
+            //email o password incorrectos, redirigir a index.php
+            guardarMensaje("Email o password incorrectos");
+            header('location: index.php');
+        }
+        
     }
 
     public function logout(){

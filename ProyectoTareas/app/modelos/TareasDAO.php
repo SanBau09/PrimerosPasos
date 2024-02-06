@@ -27,11 +27,11 @@ class TareasDAO {
 
     public function insertarTarea($texto, $fecha, $foto, $realizada) {
         // Preparar la consulta SQL con marcadores de posición (?)
-        $query = "INSERT INTO tareas (texto, fecha, foto, realizada) VALUES (?, ?, ?, 0)";
+        $query = "INSERT INTO tareas (texto, fecha, foto, realizada, idUsuario) VALUES (?, ?, ?, 0, ?)";
         $stmt = $this->conexion->prepare($query);   // Preparar la sentencia
     
         // Vincular los parámetros
-        $stmt->bind_param("sssi", $texto, $fecha, $foto, $realizada);
+        $stmt->bind_param("sssii", $texto, $fecha, $foto, $realizada, $idUsuario);
     
         // Ejecutar la sentencia
         if ($stmt->execute()) {
