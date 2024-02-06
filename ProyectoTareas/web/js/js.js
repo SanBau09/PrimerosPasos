@@ -27,13 +27,17 @@ botonInsertar.addEventListener('click',function (){
         var capaTexto = document.createElement('div');
         var papelera = document.createElement('i');
         var preloader = document.createElement('img');
+
         capaTarea.classList.add('tarea');
         capaTexto.classList.add('texto');
         capaTexto.innerHTML=tarea.texto;
+
         papelera.classList.add('fa-solid', 'fa-trash', 'papelera');
         papelera.setAttribute("data-idTarea",tarea.id);
+
         preloader.setAttribute('src','preloader.gif');
         preloader.classList.add('preloaderBorrar');
+        
         capaTarea.appendChild(capaTexto);
         capaTarea.appendChild(papelera);
         capaTarea.appendChild(preloader);
@@ -41,9 +45,6 @@ botonInsertar.addEventListener('click',function (){
 
         //Añadir manejador de evento Borrar a la nueva papelera
         papelera.addEventListener('click',manejadorBorrar);
-
-        //También se podría hacer así:
-        //document.getElementById('tareas').innerHTML+='<div class="tarea"><div class="texto">'+tarea.texto+'</div><i class="fa-solid fa-trash papelera" data-idTarea="'+tarea.id+'"></i></div>';
 
         //Borro el contenido del input
         document.getElementById('nuevaTarea').value='';
