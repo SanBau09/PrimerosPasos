@@ -63,9 +63,11 @@ body {
 
 .tituloPagina {
     text-align: center;
+    font-size: 90px;
     margin-top: 50px;
     color: #333;
     background-color: #fff;
+    opacity: 80%;
 }
 
 form {
