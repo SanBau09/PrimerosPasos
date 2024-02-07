@@ -20,6 +20,28 @@
     color:#444;
     cursor: pointer;
 }
+.check{
+    position: absolute;
+    top:10px;
+    right: 67px;
+    color: #999;
+}
+.check:hover{
+    color:#444;
+    cursor: pointer;
+}
+.edit{
+    position: absolute;
+    top:10px;
+    right: 35px;
+    color: #999;
+}
+.edit:hover{
+    color:#444;
+    cursor: pointer;
+}
+
+
 #nuevaTarea{
     display: inline-block;
     border:1px solid gray;
@@ -41,7 +63,7 @@
     cursor: pointer;
 }
 #preloaderInsertar{
-    height: 60px;
+    height: 40px;
     vertical-align: middle;
     visibility: hidden;
 }
@@ -53,7 +75,11 @@
     visibility: hidden;
 }
 
-
+.mensaje_error{
+    color:red;
+    font-style: oblique;
+    font-size: 0.7em;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -68,6 +94,7 @@ body {
     margin-top: 50px;
     color: #333;
     background-color: #fff;
+    border-radius: 50px;
     opacity: 80%;
 }
 
@@ -81,8 +108,14 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+fieldset{
+    padding: 30px;
+    font-family: system-ui;
+}
+
 form input[type="email"],
-form input[type="password"] {
+form input[type="password"],
+form input[type="text"] {
     width: 92%;
     padding: 10px;
     margin-bottom: 10px;

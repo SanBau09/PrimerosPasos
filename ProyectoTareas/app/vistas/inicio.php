@@ -7,13 +7,17 @@
     <link rel="stylesheet" href="web/css/estilos.css">
 </head>
 <body>
-    <h1 class="tituloPagina">Gestor de Tareas</h1>
+    <h1 class="tituloPagina">Task Manager</h1>
 
     <form action="index.php?accion=login" method="post">
-        <input type="email" name="email" placeholder="email">
-        <input type="password" name="password" placeholder="password">
-        <input type="submit" value="login">
-        <a href="index.php?accion=registrar">registrar</a>
+        <fieldset>
+        <legend>Login your account</legend>
+            <input type="email" name="email" placeholder="email">
+            <input type="password" name="password" placeholder="password">
+            <input type="submit" value="login">
+            <a href="index.php?accion=registrar">registrar</a>
+        </fieldset>
+
     </form>
     
 </body>

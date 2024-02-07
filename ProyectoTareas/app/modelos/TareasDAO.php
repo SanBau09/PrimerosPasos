@@ -60,6 +60,37 @@ class TareasDAO {
         }
     }
 
+    public function obtenerTodasLasTareasPorUsuario($idUsuario) {
+        // Preparar la consulta SQL con marcadores de posición (?)
+        $query = "SELECT * FROM tareas WHERE idUsuario = ?";
+        $stmt = $this->conexion->prepare($query);   // Preparar la sentencia
+        
+        // Vincular los parámetros
+        $stmt->bind_param("i", $idUsuario);
+        
+        // Ejecutar la sentencia
+        $stmt->execute();
+    
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        
+        // Almacenar las tareas en un array
+        $tareas = array();
+
+        if ($result->num_rows > 0) {
+            while ($tarea = $result->fetch_object(Tarea::class)) {
+                $tareas[] = $tarea;
+            }
+        }
+
+    
+        // Cerrar la sentencia
+        $stmt->close();
+    
+        return $tareas;
+    }
+    
+
     public function cerrarConexion() {
         $this->conexion->close();
     }

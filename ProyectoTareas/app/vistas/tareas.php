@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1 class="tituloPagina">Bienvenido a tu gestor de tareas</h1>        
+        <h1 class="tituloPagina">Welcome</h1>        
         <span class="emailUsuario"><?= Sesion::getUsuario()->getEmail() ?></span>
         <a href="index.php?accion=logout">cerrar sesión</a>
     </header>
@@ -27,6 +27,8 @@
                 <?php if(Sesion::getUsuario() && Sesion::getUsuario()->getId()==$tarea->getIdUsuario()): ?>
                     <div class="texto"><?= $tarea->getTexto() ?></div>
                     <i class="fa-solid fa-trash papelera" data-idTarea="<?= $idTarea?>"></i>
+                    <i class="fa-solid fa-circle-check check" data-idTarea="<?= $idTarea?>"></i>
+                    <i class="fa-solid fa-pen edit" data-idTarea="<?= $idTarea?>"></i>
                     <img src="web/images/preloader.gif" class="preloaderBorrar">
                 <?php endif; ?>
             </div>

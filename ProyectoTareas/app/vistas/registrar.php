@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario</title>
+    <link rel="stylesheet" href="web/css/estilos.css">
 
     <style>
-        .mensaje_error{
-            color:red;
-            font-style: oblique;
-            font-size: 0.7em;
-        }
+
     </style>
 </head>
 <body>
-    <h1>Registro</h1>
+    <h1 class="tituloPagina">Registro</h1>
     <?= $error ?>
     <form action="index.php?accion=registrar" method="post" enctype="multipart/form-data">
         <div class="campo">
             <label class="campo__label" for="nombre">Nombre</label>
-            <input class="campo__field" type="text" name="nombre" value="<?= $nombre?>"><br>
+            <input class="campo__field" type="text" name="nombre" placeholder="Tu Nombre" value="<?= $nombre?>"><br>
         </div> 
 
         <div class="campo">

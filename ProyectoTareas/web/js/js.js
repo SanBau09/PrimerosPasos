@@ -25,6 +25,8 @@ botonInsertar.addEventListener('click',function (){
         var capaTarea = document.createElement('div');
         var capaTexto = document.createElement('div');
         var papelera = document.createElement('i');
+        var check = document.createElement('i');
+        var editar = document.createElement('i');
         var preloader = document.createElement('img');
 
         capaTarea.classList.add('tarea');
@@ -34,11 +36,19 @@ botonInsertar.addEventListener('click',function (){
         papelera.classList.add('fa-solid', 'fa-trash', 'papelera');
         papelera.setAttribute("data-idTarea",tarea.id);
 
+        check.classList.add('fa-solid', 'fa-circle-check', 'check');
+        check.setAttribute("data-idTarea",tarea.id);
+
+        editar.classList.add('fa-solid', 'fa-pen', 'edit');
+        editar.setAttribute("data-idTarea",tarea.id);
+
         preloader.setAttribute('src','web/images/preloader.gif');
         preloader.classList.add('preloaderBorrar');
         
         capaTarea.appendChild(capaTexto);
         capaTarea.appendChild(papelera);
+        capaTarea.appendChild(check);
+        capaTarea.appendChild(editar);
         capaTarea.appendChild(preloader);
         document.getElementById('tareas').appendChild(capaTarea);
 
