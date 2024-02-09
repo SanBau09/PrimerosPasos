@@ -10,6 +10,15 @@
 .texto{
     
 }
+
+.tarea-pendiente .texto {
+    /* Estilo predeterminado para el texto de la tarea pendiente */
+}
+.tarea-realizada .texto{
+    text-decoration: line-through;    /* Tachar el texto */
+    color: #888;                  /* Cambiar el color del texto para indicar que está completado */
+}
+
 .papelera{
     position: absolute;
     top:10px;

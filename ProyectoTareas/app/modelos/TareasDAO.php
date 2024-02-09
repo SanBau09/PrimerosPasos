@@ -107,5 +107,13 @@ class TareasDAO {
             return false;
         }
     }
+
+    public function marcarTareaComoRealizada($idTarea){
+        $query = "UPDATE tareas SET realizada = 1 WHERE id = ?";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bind_param("i", $idTarea);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
 ?>

@@ -70,6 +70,15 @@ class ControladorTareas{
         //paramos la ejecución 1sg para simular que el servidor tarda 1sg en responder
         sleep(1);
     }
+
+    public function hacerCheck($idTarea){
+        // Realizar la actualización en la base de datos
+        $connexionDB = new ConnexionDB(MYSQL_USER, MYSQL_PASS, MYSQL_HOST, MYSQL_DB);
+        $conn = $connexionDB->getConnexion();
+
+        $tareasDAO = new TareasDAO($conn);
+        $tareasDAO->marcarTareaComoRealizada($idTarea);
+    }
 }
 
 ?>

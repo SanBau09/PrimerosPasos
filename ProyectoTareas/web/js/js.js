@@ -65,10 +65,14 @@ botonInsertar.addEventListener('click',function (){
     
 });
 
-
 let papeleras = document.querySelectorAll('.papelera');
 papeleras.forEach(papelera => {
     papelera.addEventListener('click',manejadorBorrar);
+});
+
+let checks = document.querySelectorAll('.check');
+checks.forEach(check => {
+    check.addEventListener('click',manejadorTareaRealizada);
 });
 
     
@@ -96,5 +100,32 @@ function manejadorBorrar(){
         preloader.style.visibility="hidden";
         this.style.visibility='visible';
     });
+}
+
+function manejadorTareaRealizada(){
+    //this referencia al elementos del DOM sobre el que hemos hecho click
+    // Obtener el ID de la tarea
+    let idTarea = this.getAttribute('data-idTarea');
+
+    fetch('index.php?accion=tarea_realizada&idTarea=' + idTarea)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Error al marcar la tarea como realizada');
+        })
+        .then(data => {
+            console.log('Tarea marcada como realizada:', data);
+
+            let tareaElement = document.querySelector(`[data-idTarea="${idTarea}"]`);
+            if (tareaElement) {
+                // Cambiar clase para indicar tarea realizada
+                tareaElement.classList.remove('tarea-pendiente');
+                tareaElement.classList.add('tarea-realizada');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 

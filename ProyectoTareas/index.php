@@ -41,6 +41,9 @@ $mapa = array(
                        'privada'=>true),
     'borrar_tarea'=>array('controlador'=>'ControladorTareas',
                        'metodo'=>'borrar', 
+                       'privada'=>true),   
+    'tarea_realizada'=>array('controlador'=>'ControladorTareas',
+                       'metodo'=>'hacerCheck', 
                        'privada'=>true),          
 );
 

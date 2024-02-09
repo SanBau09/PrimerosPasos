@@ -23,7 +23,7 @@
             <?php
                 $idTarea = $tarea->getId();
             ?>
-            <div class="tarea">
+            <div class="tarea <?= $tarea->getRealizada() ? 'tarea-realizada' : 'tarea-pendiente' ?>">
                 <?php if(Sesion::getUsuario() && Sesion::getUsuario()->getId()==$tarea->getIdUsuario()): ?>
                     <div class="texto"><?= $tarea->getTexto() ?></div>
                     <i class="fa-solid fa-trash papelera" data-idTarea="<?= $idTarea?>"></i>
