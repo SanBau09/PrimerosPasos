@@ -44,7 +44,10 @@ $mapa = array(
                        'privada'=>true),   
     'tarea_realizada'=>array('controlador'=>'ControladorTareas',
                        'metodo'=>'hacerCheck', 
-                       'privada'=>true),          
+                       'privada'=>true),
+    'editar_tarea'=>array('controlador'=>'ControladorTareas',
+                       'metodo'=>'editar', 
+                       'privada'=>true),              
 );
 
 //Parseo de la ruta

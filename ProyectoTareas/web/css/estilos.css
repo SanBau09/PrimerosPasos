@@ -11,8 +11,8 @@
     
 }
 
-.tarea-pendiente .texto {
-    /* Estilo predeterminado para el texto de la tarea pendiente */
+.tarea-pendiente .texto {  /* Estilo predeterminado para el texto de la tarea pendiente */
+    
 }
 .tarea-realizada .texto{
     text-decoration: line-through;    /* Tachar el texto */

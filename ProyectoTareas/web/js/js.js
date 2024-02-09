@@ -55,6 +55,9 @@ botonInsertar.addEventListener('click',function (){
         //Añadir manejador de evento Borrar a la nueva papelera
         papelera.addEventListener('click',manejadorBorrar);
 
+        //Añadir manejador de evento Check al nuevo check IMPORTANTEEEE
+        check.addEventListener('click',manejadorTareaRealizada);
+
         //Borro el contenido del input
         document.getElementById('nuevaTarea').value='';
     })
@@ -115,17 +118,21 @@ function manejadorTareaRealizada(){
             throw new Error('Error al marcar la tarea como realizada');
         })
         .then(data => {
-            console.log('Tarea marcada como realizada:', data);
+            console.log('Tarea marcada como realizada:', data.respuesta); //data lleva el print
 
             let tareaElement = document.querySelector(`[data-idTarea="${idTarea}"]`);
             if (tareaElement) {
                 // Cambiar clase para indicar tarea realizada
-                tareaElement.classList.remove('tarea-pendiente');
-                tareaElement.classList.add('tarea-realizada');
+                //tareaElement.classList.remove('tarea-pendiente');
+                tareaElement.parentNode.classList.add('tarea-realizada'); //parentNode para que coja el padre Tarea
             }
         })
         .catch(error => {
             console.error('Error:', error);
         });
-}
+    }
+
+    function manejadorEditar(){
+        
+    }
 

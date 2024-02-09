@@ -78,6 +78,49 @@ class ControladorTareas{
 
         $tareasDAO = new TareasDAO($conn);
         $tareasDAO->marcarTareaComoRealizada($idTarea);
+
+        print  json_encode(['respuesta'=>'ok']); //ESTO PARA LA RESPUESTA DEL SERVIDOR
+    }
+
+    //revisar
+    public function editar($idTarea){
+        //Conectamos con la bD
+        $connexionDB = new ConnexionDB(MYSQL_USER,MYSQL_PASS,MYSQL_HOST,MYSQL_DB);
+        $conn = $connexionDB->getConnexion();
+
+        // Crear un objeto TareasDAO para acceder a la base de datos
+        $tareasDAO = new TareasDAO();
+
+        // Obtener la tarea por su ID
+        $tarea = $tareasDAO->obtenerTareaPorId($idTarea);
+
+        // Verificar si la tarea existe
+        if ($tarea) {
+            // Actualizar el texto de la tarea si se proporciona
+            if (!empty($nuevoTexto)) {
+                $tarea->setTexto($nuevoTexto);
+            }
+
+            // Actualizar la foto de la tarea si se proporciona
+            if (!empty($nuevaFoto)) {
+                $tarea->setFoto($nuevaFoto);
+            }
+
+            // Actualizar la tarea en la base de datos
+            if ($tareasDAO->update($tarea)) {
+                // Tarea actualizada correctamente
+                echo "Tarea actualizada correctamente.";
+            } else {
+                // Error al actualizar la tarea
+                echo "Error al actualizar la tarea.";
+            }
+        } else {
+            // La tarea no existe
+            echo "La tarea no existe.";
+        }
+        // Devolver la respuesta como JSON
+        print  json_encode(['respuesta'=>'ok']); //ESTO PARA LA RESPUESTA DEL SERVIDOR
+
     }
 }
 

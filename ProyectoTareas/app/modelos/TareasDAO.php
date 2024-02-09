@@ -46,6 +46,18 @@ class TareasDAO {
             return null;
         }
     }
+    //revisar
+    function update($tarea){
+        if(!$stmt = $this->conexion->prepare("UPDATE tareas SET texto=?, foto=?, WHERE id=?")){
+            die("Error al preparar la consulta update: " . $this->conexion->error );
+        }
+        $texto = $tarea->getTexto();
+        $foto = $tarea->getFoto();
+        $id = $tarea->getId(); 
+
+        $stmt->bind_param('ssi', $texto, $foto, $id);
+        return $stmt->execute();
+    }
 
     public function obtenerTareaPorID($id) {
         $query = "SELECT * FROM tareas WHERE id = $id";
@@ -82,8 +94,6 @@ class TareasDAO {
                 $tareas[] = $tarea;
             }
         }
-
-    
         // Cerrar la sentencia
         $stmt->close();
     
