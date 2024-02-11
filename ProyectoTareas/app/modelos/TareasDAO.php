@@ -118,10 +118,10 @@ class TareasDAO {
         }
     }
 
-    public function marcarTareaComoRealizada($idTarea){
-        $query = "UPDATE tareas SET realizada = 1 WHERE id = ?";
+    public function marcarTareaComoRealizada($idTarea, $realizada){
+        $query = "UPDATE tareas SET realizada = ? WHERE id = ?";
         $stmt = $this->conexion->prepare($query);
-        $stmt->bind_param("i", $idTarea);
+        $stmt->bind_param("ii",$realizada, $idTarea);
         $stmt->execute();
         $stmt->close();
     }

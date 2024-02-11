@@ -124,7 +124,8 @@ function manejadorTareaRealizada(){
             if (tareaElement) {
                 // Cambiar clase para indicar tarea realizada
                 //tareaElement.classList.remove('tarea-pendiente');
-                tareaElement.parentNode.classList.add('tarea-realizada'); //parentNode para que coja el padre Tarea
+                //tareaElement.parentNode.classList.add('tarea-realizada'); //parentNode para que coja el padre Tarea
+                tareaElement.parentNode.classList.toggle('tarea-realizada'); 
             }
         })
         .catch(error => {

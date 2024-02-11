@@ -77,7 +77,15 @@ class ControladorTareas{
         $conn = $connexionDB->getConnexion();
 
         $tareasDAO = new TareasDAO($conn);
-        $tareasDAO->marcarTareaComoRealizada($idTarea);
+
+         // Obtener la tarea por su ID
+        $tarea = $tareasDAO->obtenerTareaPorId($idTarea);
+        $estaRealizada = $tarea->getRealizada();
+        if ($estaRealizada == 0){
+            $tareasDAO->marcarTareaComoRealizada($idTarea, 1);
+        } else {
+            $tareasDAO->marcarTareaComoRealizada($idTarea, 0);
+        }
 
         print  json_encode(['respuesta'=>'ok']); //ESTO PARA LA RESPUESTA DEL SERVIDOR
     }
