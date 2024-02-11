@@ -39,13 +39,13 @@
     color:#444;
     cursor: pointer;
 }
-.edit{
+.elemEdit{
     position: absolute;
     top:10px;
     right: 35px;
     color: #999;
 }
-.edit:hover{
+.elemEdit:hover{
     color:#444;
     cursor: pointer;
 }
@@ -71,11 +71,19 @@
     font-size: 1.5em;
     cursor: pointer;
 }
+
 #preloaderInsertar{
     height: 40px;
     vertical-align: middle;
     visibility: hidden;
 }
+
+#preloaderEditar{
+    height: 40px;
+    vertical-align: middle;
+    visibility: hidden;
+}
+
 .preloaderBorrar{
     position: absolute;
     top:5px;
@@ -156,4 +164,37 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+#contenedorEditar{
+    border:1px solid gray;
+    background-color: white;
+    padding: 10px;
+    position: relative;
+    width: 60%;
+    margin: 2px auto;
+    font-size: 1.5em;
+    visibility: hidden;
+}
+
+#botonCancelarEditar{
+    display: inline-block;
+    border:1px solid gray;
+    padding: 10px;
+    position: relative;
+    width: 20%;
+    margin: 10px auto;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+#botonAceptarEditar{
+    display: inline-block;
+    border:1px solid gray;
+    padding: 10px;
+    position: relative;
+    width: 20%;
+    margin: 10px auto;
+    font-size: 1.5em;
+    cursor: pointer;
 }

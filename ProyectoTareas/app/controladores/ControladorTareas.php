@@ -90,7 +90,6 @@ class ControladorTareas{
         print  json_encode(['respuesta'=>'ok']); //ESTO PARA LA RESPUESTA DEL SERVIDOR
     }
 
-    //revisar
     public function editar($idTarea){
         //Conectamos con la bD
         $connexionDB = new ConnexionDB(MYSQL_USER,MYSQL_PASS,MYSQL_HOST,MYSQL_DB);

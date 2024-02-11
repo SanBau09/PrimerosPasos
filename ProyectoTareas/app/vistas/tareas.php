@@ -17,26 +17,35 @@
     <?php 
         imprimirMensaje();
     ?>
-     
-    <div id="tareas">
-        <?php foreach ($tareas as $tarea): ?>
-            <?php
-                $idTarea = $tarea->getId();
-            ?>
-            <div class="tarea <?= $tarea->getRealizada() ? 'tarea-realizada' : 'tarea-pendiente' ?>">
-                <?php if(Sesion::getUsuario() && Sesion::getUsuario()->getId()==$tarea->getIdUsuario()): ?>
-                    <div class="texto"><?= $tarea->getTexto() ?></div>
-                    <i class="fa-solid fa-trash papelera" data-idTarea="<?= $idTarea?>"></i>
-                    <i class="fa-solid fa-circle-check check" data-idTarea="<?= $idTarea?>"></i>
-                    <i class="fa-solid fa-pen edit" data-idTarea="<?= $idTarea?>"></i>
-                    <img src="web/images/preloader.gif" class="preloaderBorrar">
-                <?php endif; ?>
-            </div>
-        <?php endforeach; ?>
-    </div>
+    <div id="contenedorTareas">
+        <div id="tareas">
+            <?php foreach ($tareas as $tarea): ?>
+                <?php
+                    $idTarea = $tarea->getId();
+                ?>
+                <div class="tarea <?= $tarea->getRealizada() ? 'tarea-realizada' : 'tarea-pendiente' ?>">
+                    <?php if(Sesion::getUsuario() && Sesion::getUsuario()->getId()==$tarea->getIdUsuario()): ?>
+                        <div class="texto"><?= $tarea->getTexto() ?></div>
+                        <i class="fa-solid fa-trash papelera" data-idTarea="<?= $idTarea?>"></i>
+                        <i class="fa-solid fa-circle-check check" data-idTarea="<?= $idTarea?>"></i>
+                        <i class="fa-solid fa-pen elemEdit" data-idTarea="<?= $idTarea?>"></i>
+                        <img src="web/images/preloader.gif" class="preloaderBorrar">
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
-    <input type="text" id="nuevaTarea">
-    <button id="botonNuevaTarea">Enviar</button><img src="web/images/preloader.gif" id="preloaderInsertar">
+        <input type="text" id="nuevaTarea">
+        <button id="botonNuevaTarea">Enviar</button><img src="web/images/preloader.gif" id="preloaderInsertar">
+    </div>
+    <div id="contenedorEditar">
+        <div id="camposEditar">
+            <input type="text" class="texto" id="editarTexto" placeholder="Modifica el texto"></br>                    
+            <input type="file" id="editarFoto">
+        </div>  
+        <button id="botonCancelarEditar">Cancelar</button><img src="web/images/preloader.gif" id="preloaderEditar">
+        <button id="botonAceptarEditar">Aceptar</button><img src="web/images/preloader.gif" id="preloaderEditar">              
+    </div>
 
     <script src="web/js/js.js" type="text/javascript"></script>
 </body>

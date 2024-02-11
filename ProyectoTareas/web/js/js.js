@@ -26,7 +26,7 @@ botonInsertar.addEventListener('click',function (){
         var capaTexto = document.createElement('div');
         var papelera = document.createElement('i');
         var check = document.createElement('i');
-        var editar = document.createElement('i');
+        var mostrarEditar = document.createElement('i');
         var preloader = document.createElement('img');
 
         capaTarea.classList.add('tarea');
@@ -39,8 +39,8 @@ botonInsertar.addEventListener('click',function (){
         check.classList.add('fa-solid', 'fa-circle-check', 'check');
         check.setAttribute("data-idTarea",tarea.id);
 
-        editar.classList.add('fa-solid', 'fa-pen', 'edit');
-        editar.setAttribute("data-idTarea",tarea.id);
+        mostrarEditar.classList.add('fa-solid', 'fa-pen', 'elemEdit');
+        mostrarEditar.setAttribute("data-idTarea",tarea.id);
 
         preloader.setAttribute('src','web/images/preloader.gif');
         preloader.classList.add('preloaderBorrar');
@@ -48,7 +48,7 @@ botonInsertar.addEventListener('click',function (){
         capaTarea.appendChild(capaTexto);
         capaTarea.appendChild(papelera);
         capaTarea.appendChild(check);
-        capaTarea.appendChild(editar);
+        capaTarea.appendChild(mostrarEditar);
         capaTarea.appendChild(preloader);
         document.getElementById('tareas').appendChild(capaTarea);
 
@@ -77,6 +77,14 @@ let checks = document.querySelectorAll('.check');
 checks.forEach(check => {
     check.addEventListener('click',manejadorTareaRealizada);
 });
+
+let elementosEditar = document.querySelectorAll('.elemEdit');
+elementosEditar.forEach(elemEdit => {
+    elemEdit.addEventListener('click',manejadorElementosEditar);
+});
+
+let cancelarEditar = document.getElementById('botonCancelarEditar');
+cancelarEditar.addEventListener('click',manejadorCancelarEditar);
 
     
 function manejadorBorrar(){
@@ -133,7 +141,29 @@ function manejadorTareaRealizada(){
         });
     }
 
-    function manejadorEditar(){
+    function manejadorElementosEditar(){
+        let idTarea = this.getAttribute('data-idTarea');
+
+        // Primero oculto el contenedor de tareas
+        var tareas = document.getElementById('contenedorTareas');
+        tareas.style.display="none";
+
+        //mostrar el div para editar
+        var editarTarea = document.getElementById('contenedorEditar');
+        editarTarea.style.visibility="visible";
+        editarTarea.style.display="block";
+
+    }
+
+    function manejadorCancelarEditar(){
         
+        // Primero oculto el div para editar
+        var editarTarea = document.getElementById('contenedorEditar');
+        editarTarea.style.display="none";
+        
+        //mostrar el contenedor de tareas
+        var tareas = document.getElementById('contenedorTareas');
+        tareas.style.display="block";
+
     }
 
