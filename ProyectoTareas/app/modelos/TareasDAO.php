@@ -48,7 +48,7 @@ class TareasDAO {
     }
     
     function update($tarea){
-        if(!$stmt = $this->conexion->prepare("UPDATE tareas SET texto=?, foto=?, WHERE id=?")){
+        if(!$stmt = $this->conexion->prepare("UPDATE tareas SET texto=?, foto=? WHERE id=?")){
             die("Error al preparar la consulta update: " . $this->conexion->error );
         }
         $texto = $tarea->getTexto();

@@ -108,11 +108,35 @@ body {
 .tituloPagina {
     text-align: center;
     font-size: 90px;
-    margin-top: 50px;
+    margin-top: 60px;
     color: #333;
     background-color: #fff;
     border-radius: 50px;
     opacity: 80%;
+    height: 6.5rem;
+}
+
+.titulo-y-enlace {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50px;
+    opacity: 80%;
+    height: 6.5rem;
+    margin-bottom: 4rem;
+   
+}
+
+.emailUsuario {
+    margin-top: 10px;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+.contenedor{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 form {
@@ -197,4 +221,11 @@ a:hover {
     margin: 10px auto;
     font-size: 1.5em;
     cursor: pointer;
+}
+
+.campoOculto{
+    display: none;
+}
+.centrar-txt{
+    text-align: center;
 }

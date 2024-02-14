@@ -90,7 +90,7 @@ class ControladorTareas{
         print  json_encode(['respuesta'=>'ok']); //ESTO PARA LA RESPUESTA DEL SERVIDOR
     }
 
-    public function editar($idTarea){
+    public function editar($idTarea, $nuevoTexto){
         //Conectamos con la bD
         $connexionDB = new ConnexionDB(MYSQL_USER,MYSQL_PASS,MYSQL_HOST,MYSQL_DB);
         $conn = $connexionDB->getConnexion();
@@ -98,6 +98,8 @@ class ControladorTareas{
         // Crear un objeto TareasDAO para acceder a la base de datos
         $tareasDAO = new TareasDAO();
 
+        $nuevaFoto = htmlentities($_FILES['fotoTarea']['name']);
+        
         // Obtener la tarea por su ID
         $tarea = $tareasDAO->obtenerTareaPorId($idTarea);
 
@@ -110,24 +112,41 @@ class ControladorTareas{
 
             // Actualizar la foto de la tarea si se proporciona
             if (!empty($nuevaFoto)) {
-                $tarea->setFoto($nuevaFoto);
+
+                if($_FILES['fotoTarea']['type'] != 'image/jpeg' &&
+                $_FILES['fotoTarea']['type'] != 'image/webp' &&
+                $_FILES['fotoTarea']['type'] != 'image/png'){
+
+                    print  json_encode(['respuesta'=>'error', 'mensaje'=>'La foto no tiene el formato admitido, debe ser jpg, png o webp']);
+                } else{
+
+                    $informacionPath = pathinfo($nuevaFoto);
+                    $extension = $informacionPath['extension'];
+                    $nombreArchivo = md5(time()+rand()) . '.' . $extension;
+                    move_uploaded_file($_FILES['fotoTarea']['tmp_name'],"web/fotoTarea/$nombreArchivo");   
+                    
+                    // Se borra la anterior foto
+                    $fotoAnterior = $tarea->getFoto();
+                    if (!empty($fotoAnterior) && file_exists("web/fotoTarea/".$fotoAnterior)){
+                        unlink("web/fotoTarea/".$fotoAnterior);
+                    }
+
+                    $tarea->setFoto($nombreArchivo);
+                }
             }
 
             // Actualizar la tarea en la base de datos
             if ($tareasDAO->update($tarea)) {
                 // Tarea actualizada correctamente
-                echo "Tarea actualizada correctamente.";
+                print json_encode(['respuesta'=>'ok', 'texto'=>$tarea->getTexto(), 'foto'=>$tarea->getFoto()]); //ESTO PARA LA RESPUESTA DEL SERVIDOR
             } else {
                 // Error al actualizar la tarea
-                echo "Error al actualizar la tarea.";
+                print  json_encode(['respuesta'=>'error']);
             }
         } else {
             // La tarea no existe
-            echo "La tarea no existe.";
-        }
-        // Devolver la respuesta como JSON
-        print  json_encode(['respuesta'=>'ok']); //ESTO PARA LA RESPUESTA DEL SERVIDOR
-
+            print  json_encode(['respuesta'=>'error']);
+        }        
     }
 }
 

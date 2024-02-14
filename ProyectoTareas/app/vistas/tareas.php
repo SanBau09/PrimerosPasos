@@ -9,9 +9,11 @@
 </head>
 <body>
     <header>
-        <h1 class="tituloPagina">Welcome</h1>        
-        <span class="emailUsuario"><?= Sesion::getUsuario()->getEmail() ?></span>
-        <a href="index.php?accion=logout">cerrar sesión</a>
+    <div class="titulo-y-enlace contenedor">
+            <h1 class="tituloPagina">Welcome</h1>        
+            <span class="emailUsuario"><?= Sesion::getUsuario()->getEmail() ?></span>
+            <a href="index.php?accion=logout">cerrar sesión</a>
+        </div>
     </header>
     
     <?php 
@@ -22,13 +24,16 @@
             <?php foreach ($tareas as $tarea): ?>
                 <?php
                     $idTarea = $tarea->getId();
+                    $texto = $tarea->getTexto();
+                    $foto = $tarea->getFoto();
                 ?>
                 <div class="tarea <?= $tarea->getRealizada() ? 'tarea-realizada' : 'tarea-pendiente' ?>">
                     <?php if(Sesion::getUsuario() && Sesion::getUsuario()->getId()==$tarea->getIdUsuario()): ?>
-                        <div class="texto"><?= $tarea->getTexto() ?></div>
-                        <i class="fa-solid fa-trash papelera" data-idTarea="<?= $idTarea?>"></i>
-                        <i class="fa-solid fa-circle-check check" data-idTarea="<?= $idTarea?>"></i>
-                        <i class="fa-solid fa-pen elemEdit" data-idTarea="<?= $idTarea?>"></i>
+                        <div id="cajaTexto" class="texto"><?= $texto?></div>
+                        <img id="imagenTarea" src="web/fotoTarea/<?=$foto?>" style="height: 100px; border: 1px solid black";>
+                        <i id="btnPapelera" class="fa-solid fa-trash papelera" data-idTarea="<?= $idTarea?>"></i>
+                        <i id="btnCheck" class="fa-solid fa-circle-check check" data-idTarea="<?= $idTarea?>"></i>
+                        <i id="btnElemEdit" class="fa-solid fa-pen elemEdit" data-idTarea="<?= $idTarea?>" data-texto="<?= $texto?>"></i>
                         <img src="web/images/preloader.gif" class="preloaderBorrar">
                     <?php endif; ?>
                 </div>
@@ -41,7 +46,8 @@
     <div id="contenedorEditar">
         <div id="camposEditar">
             <input type="text" class="texto" id="editarTexto" placeholder="Modifica el texto"></br>                    
-            <input type="file" id="editarFoto">
+            <input type="file" id="editarFoto" accept="image/jpeg, image/gif, image/webp, image/png">
+            <div id="campoIdTarea" class="campoOculto"></div>
         </div>  
         <button id="botonCancelarEditar">Cancelar</button><img src="web/images/preloader.gif" id="preloaderEditar">
         <button id="botonAceptarEditar">Aceptar</button><img src="web/images/preloader.gif" id="preloaderEditar">              

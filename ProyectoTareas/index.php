@@ -99,12 +99,16 @@ $metodo = $mapa[$accion]['metodo'];
 //Ejecutamos el método de la clase controlador
 $objeto = new $controlador();
 
-//Como hay métodos que requieren del idTarea para ejecutarse, hay que recoger el idTarea de los parámetros de la URL
-if(isset($_GET['idTarea'])){
-    $objeto->$metodo($_GET['idTarea']);
-}else{
-    $objeto->$metodo();
+// El método editar necesita tres parámetros para poder ser ejecutado
+if(isset($_GET['idTarea']) && isset($_GET['textoTarea'])){
+    $objeto->$metodo($_GET['idTarea'], $_GET['textoTarea']);
+} else{
+    //Como hay métodos que requieren del idTarea para ejecutarse, hay que recoger el idTarea de los parámetros de la URL
+    if(isset($_GET['idTarea'])){        
+        $objeto->$metodo($_GET['idTarea']);
+    }else{
+        $objeto->$metodo();
+    }
 }
-
 
 ?>

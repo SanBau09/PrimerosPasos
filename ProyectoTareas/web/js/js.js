@@ -58,6 +58,9 @@ botonInsertar.addEventListener('click',function (){
         //Añadir manejador de evento Check al nuevo check IMPORTANTEEEE
         check.addEventListener('click',manejadorTareaRealizada);
 
+        //Añadir manejador de evento Editar al nuevo editar IMPORTANTEEEE
+        mostrarEditar.addEventListener('click',manejadorElementosEditar);
+
         //Borro el contenido del input
         document.getElementById('nuevaTarea').value='';
     })
@@ -85,6 +88,9 @@ elementosEditar.forEach(elemEdit => {
 
 let cancelarEditar = document.getElementById('botonCancelarEditar');
 cancelarEditar.addEventListener('click',manejadorCancelarEditar);
+
+let aceptarEditar = document.getElementById('botonAceptarEditar');
+aceptarEditar.addEventListener('click',manejadorAceptarEditar);
 
     
 function manejadorBorrar(){
@@ -142,11 +148,24 @@ function manejadorTareaRealizada(){
     }
 
     function manejadorElementosEditar(){
-        let idTarea = this.getAttribute('data-idTarea');
 
         // Primero oculto el contenedor de tareas
         var tareas = document.getElementById('contenedorTareas');
         tareas.style.display="none";
+
+        //cargar los datos de la tarea y del texto
+        //por motivos de seguridad las fotos no sse pueden precargar desde el cliente
+        let idTarea = this.getAttribute('data-idTarea');
+        let texto = this.getAttribute('data-texto');
+
+        //obtengo los campos para asignar los valores
+        let textoNuevo = document.getElementById('editarTexto');
+        let idTareaOculta = document.getElementById('campoIdTarea');
+        // Se guarda el valor del id Tarea en un campo oculto para después poder ser utilizado al pulsar el botón de Aceptar
+        idTareaOculta.innerHTML = idTarea;
+
+        //se le asignan los valores que vienen de las tarea creada
+        textoNuevo.value = texto;       
 
         //mostrar el div para editar
         var editarTarea = document.getElementById('contenedorEditar');
@@ -164,6 +183,50 @@ function manejadorTareaRealizada(){
         //mostrar el contenedor de tareas
         var tareas = document.getElementById('contenedorTareas');
         tareas.style.display="block";
+    }
 
+    function manejadorAceptarEditar(){
+        //obtener id de la tarea a editar
+        let idTarea = document.getElementById('campoIdTarea').innerHTML;
+        //obtener el valor del texto nuevo
+        let valorNuevoTexto = document.getElementById('editarTexto').value;
+        //obtener el valor de la foto 
+        let arrayFotos = document.getElementById('editarFoto').files;
+        let formData = new FormData();
+
+        if (arrayFotos != null && arrayFotos.length > 0){
+            formData.append('fotoTarea',arrayFotos[0]);
+        }
+
+        // Ahora se llama al manejador para que haga el update de los nuevos valores en la base de datos
+        fetch('index.php?accion=editar_tarea&idTarea=' + idTarea + '&textoTarea=' + valorNuevoTexto, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Error editar la tarea');
+        })
+        .then(data => {
+            console.log('Tarea marcada editada:', data.respuesta); //data lleva el print
+
+            // Se resetea el selector de imágenes
+            document.getElementById('editarFoto').value = '';
+
+            let tareaElement = document.querySelector(`[data-idTarea="${idTarea}"]`);
+            if (tareaElement) {
+                // Se actualizan los datos de la lista con los datos editados
+                tareaElement.parentNode.children["cajaTexto"].innerHTML = data.texto;
+                tareaElement.parentNode.children["imagenTarea"].src = "web/fotoTarea/" + data.foto;
+                tareaElement.parentNode.children["btnElemEdit"].setAttribute("data-texto",data.texto);
+                // Se vuelve a mostrar la lista
+                manejadorCancelarEditar();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 
