@@ -24,6 +24,7 @@ botonInsertar.addEventListener('click',function (){
         //Añado la la tarea al div "tareas" modificando el DOM
         var capaTarea = document.createElement('div');
         var capaTexto = document.createElement('div');
+        var imagen = document.createElement('img');
         var papelera = document.createElement('i');
         var check = document.createElement('i');
         var mostrarEditar = document.createElement('i');
@@ -31,7 +32,12 @@ botonInsertar.addEventListener('click',function (){
 
         capaTarea.classList.add('tarea');
         capaTexto.classList.add('texto');
+        capaTexto.id="cajaTexto";
         capaTexto.innerHTML=tarea.texto;
+
+        imagen.id="imagenTarea"; 
+        imagen.classList.add('imagenTarea');
+        imagen.style.display = "none";
 
         papelera.classList.add('fa-solid', 'fa-trash', 'papelera');
         papelera.setAttribute("data-idTarea",tarea.id);
@@ -41,11 +47,14 @@ botonInsertar.addEventListener('click',function (){
 
         mostrarEditar.classList.add('fa-solid', 'fa-pen', 'elemEdit');
         mostrarEditar.setAttribute("data-idTarea",tarea.id);
+        mostrarEditar.setAttribute("data-texto",tarea.texto);
+        mostrarEditar.id="btnElemEdit";
 
         preloader.setAttribute('src','web/images/preloader.gif');
         preloader.classList.add('preloaderBorrar');
         
         capaTarea.appendChild(capaTexto);
+        capaTarea.appendChild(imagen);
         capaTarea.appendChild(papelera);
         capaTarea.appendChild(check);
         capaTarea.appendChild(mostrarEditar);
@@ -114,8 +123,7 @@ function manejadorBorrar(){
     })
     .finally(function(){
         //Ocultamos preloader
-        preloader.style.visibility="hidden";
-        this.style.visibility='visible';
+        preloader.style.visibility="hidden";        
     });
 }
 
@@ -220,6 +228,7 @@ function manejadorTareaRealizada(){
                 // Se actualizan los datos de la lista con los datos editados
                 tareaElement.parentNode.children["cajaTexto"].innerHTML = data.texto;
                 tareaElement.parentNode.children["imagenTarea"].src = "web/fotoTarea/" + data.foto;
+                tareaElement.parentNode.children["imagenTarea"].style = "block";
                 tareaElement.parentNode.children["btnElemEdit"].setAttribute("data-texto",data.texto);
                 // Se vuelve a mostrar la lista
                 manejadorCancelarEditar();

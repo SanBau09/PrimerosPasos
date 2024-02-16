@@ -30,7 +30,7 @@
                 <div class="tarea <?= $tarea->getRealizada() ? 'tarea-realizada' : 'tarea-pendiente' ?>">
                     <?php if(Sesion::getUsuario() && Sesion::getUsuario()->getId()==$tarea->getIdUsuario()): ?>
                         <div id="cajaTexto" class="texto"><?= $texto?></div>
-                        <img id="imagenTarea" src="web/fotoTarea/<?=$foto?>" style="height: 100px; border: 1px solid black";>
+                        <img id="imagenTarea" class="imagenTarea" src="web/fotoTarea/<?=$foto?>">
                         <i id="btnPapelera" class="fa-solid fa-trash papelera" data-idTarea="<?= $idTarea?>"></i>
                         <i id="btnCheck" class="fa-solid fa-circle-check check" data-idTarea="<?= $idTarea?>"></i>
                         <i id="btnElemEdit" class="fa-solid fa-pen elemEdit" data-idTarea="<?= $idTarea?>" data-texto="<?= $texto?>"></i>
